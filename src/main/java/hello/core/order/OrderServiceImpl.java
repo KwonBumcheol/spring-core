@@ -3,30 +3,23 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-//    @Autowired // @Autowired(required = false) - 수정자(setter)의 특징: 선택
-//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
-//        this.discountPolicy = discountPolicy;
+//    @Autowired // 생성자가 1개일 경우 생략 가능
+    // @RequiredArgsConstructor 사용시 자동으로 생성해줌
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository; // MemoryMemberRepository
+//        this.discountPolicy = discountPolicy; // FixDiscountPolicy
 //    }
-//
-//    @Autowired
-//    public void setMemberRepository(MemberRepository memberRepository) {
-//        this.memberRepository = memberRepository;
-//    }
-
-    @Autowired // 생성자가 1개일 경우 생략 가능
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository; // MemoryMemberRepository
-        this.discountPolicy = discountPolicy; // FixDiscountPolicy
-    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
