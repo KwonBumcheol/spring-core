@@ -8,18 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-//    @Autowired // 생성자가 1개일 경우 생략 가능
-    // @RequiredArgsConstructor 사용시 자동으로 생성해줌
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        this.memberRepository = memberRepository; // MemoryMemberRepository
-//        this.discountPolicy = discountPolicy; // FixDiscountPolicy
-//    }
+    @Autowired // 생성자가 1개일 경우 생략 가능
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository; // MemoryMemberRepository
+        this.discountPolicy = discountPolicy; // FixDiscountPolicy
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
