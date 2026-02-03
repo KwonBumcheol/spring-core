@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -19,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 //    private DiscountPolicy rateDiscountPolicy; // 1.@Autowired 필드명 매칭 - 빈 이름
 
     @Autowired // 생성자가 1개일 경우 생략 가능
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) { // 2. @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy - 추가 구분자(빈 이름 변경 x)
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) { // 2. @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy - 추가 구분자(빈 이름 변경 x)
         this.memberRepository = memberRepository; // MemoryMemberRepository
         this.discountPolicy = discountPolicy; // FixDiscountPolicy
     }
